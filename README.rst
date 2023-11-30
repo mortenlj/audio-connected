@@ -13,8 +13,18 @@ To make it run on startup, you can add a XDG Autostart entry in `$XDG_CONFIG_HOM
 
 Example:
 
-.. include:: audio-connected.desktop
-    :code: ini
+.. code:: ini
+
+    [Desktop Entry]
+    Version=1.5
+    Type=Application
+    Name=Audio Connected
+    Comment=Set EPOS ADAPT 660 headset as default sink when connected
+    Exec=audio-connected "EPOS ADAPT 660"
+    OnlyShowIn=XFCE;
+    StartupNotify=false
+    Terminal=false
+    Hidden=false
 
 
 .. _pipx: https://pypa.github.io/pipx/
