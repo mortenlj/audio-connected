@@ -50,13 +50,13 @@ testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "pulsectl"
-version = "23.5.2"
+version = "24.8.0"
 description = "Python high-level interface and ctypes-based bindings for PulseAudio (libpulse)"
 optional = false
 python-versions = "*"
 files = [
-    {file = "pulsectl-23.5.2-py2.py3-none-any.whl", hash = "sha256:b77295cfbce5cb5b7b80ab5903aa0239b38bcbb84ac18ae1f42d43ed3dac9d86"},
-    {file = "pulsectl-23.5.2.tar.gz", hash = "sha256:e911d398eaf0539cf3c63b4217357b51a3d1b7e4a50607d1591cf2b49f5d2c6a"},
+    {file = "pulsectl-24.8.0-py2.py3-none-any.whl", hash = "sha256:050ae7e122c51a55f47c2ce0b377ebbcbc86e163514048904b5ba580ab6912c5"},
+    {file = "pulsectl-24.8.0.tar.gz", hash = "sha256:b051506d0d73d3cc4357cefd3de17bb859d7ecf004e994b0f7cfa87851bc7156"},
 ]
 
 [[package]]
@@ -82,4 +82,4 @@ testing = ["argcomplete", "attrs (>=19.2.0)", "hypothesis (>=3.56)", "mock", "no
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "ce7c0213d4206daa93dc4f45fb20cf36df42eec1c06eeb14758a407e94f20659"
+content-hash = "69d1bf88429fb43f639c449384732526c514aedddf361c356cb3ba7bd36713db"
