@@ -15,7 +15,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.11"
-pulsectl = "^23.5.2"
+pulsectl = "^24.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
