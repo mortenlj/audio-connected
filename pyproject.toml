@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "audio-connected"
-version = "0.1.1"
+version = "0.2.0"
 license = "MIT"
 description = "Watches PulseAudio events for new sinks connected, and if the name matches the configured name, make that sink the default sink."
 authors = ["Morten Lied Johansen <mortenjo@ifi.uio.no>"]
@@ -8,6 +8,9 @@ readme = "README.rst"
 repository = "https://github.com/mortenlj/audio-connected"
 packages = [
     { include = "audio_connected" },
+]
+include = [
+    { path = "audio-connected.desktop", format = "sdist" }
 ]
 
 [tool.poetry.urls]
