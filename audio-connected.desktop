@@ -2,8 +2,8 @@
 Version=1.5
 Type=Application
 Name=Audio Connected
-Comment=Set EPOS ADAPT 660 headset as default sink when connected
-Exec=audio-connected "EPOS ADAPT 660"
+Comment=Set MOMENTUM 4 headset as default sink when connected
+Exec=audio-connected "MOMENTUM 4"
 OnlyShowIn=XFCE;
 StartupNotify=false
 Terminal=false
