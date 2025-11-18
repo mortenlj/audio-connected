@@ -1,0 +1,30 @@
+[tools]
+poetry = "latest"
+python = "3.11"
+ruff = "latest"
+
+[tasks.fmt]
+description = "Format source"
+run = "ruff format"
+
+[tasks.fmt-check]
+description = "Check formatting"
+run = "ruff format --diff"
+
+[tasks.lint]
+description = "Lint the project"
+run = "ruff check"
+
+[tasks.lint-fix]
+description = "Run lint fixers"
+run = "ruff check --fix"
+
+[tasks.ci]
+description = "Run CI tasks"
+depends = ["fmt-check", "lint"]
+
+[tasks.build]
+description = "Build the project"
+run = "poetry build"
+sources = ["audio_connected/**/*.py", "poetry.lock", "pyproject.toml"]
+outputs = ["dist/audio_connected-*.tar.gz", "dist/audio_connected-*.whl"]

@@ -30,3 +30,6 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 audio-connected = "audio_connected:main"
+
+[tool.ruff]
+line-length = 120

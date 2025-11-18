@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-"""Listen for new sinks connected, and if it is the requested sink, make it the default sink.
-"""
+"""Listen for new sinks connected, and if it is the requested sink, make it the default sink."""
+
 import argparse
 
 import pulsectl
@@ -43,5 +43,5 @@ def main():
             switcher.switch(pulse)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
