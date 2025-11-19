@@ -1,0 +1,24 @@
+name: audio-connected
+
+on:
+  push:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jdx/mise-action@v2
+      - run: mise run extract-ci-info
+
+  ci:
+    runs-on: ubuntu-latest
+    needs:
+      - setup
+    strategy:
+      matrix:
+        task: ${{ needs.setup.outputs.ci-tasks }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jdx/mise-action@v2
+      - run: mise run ${{ matrix.task }}
