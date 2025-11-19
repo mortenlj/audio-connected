@@ -3,7 +3,29 @@
 # [MISE] hide=true
 import json
 import os
+import subprocess
+import sys
 import tomllib
+from io import StringIO
+
+
+class Output:
+    def __init__(self):
+        output = os.getenv("GITHUB_OUTPUT")
+        if output:
+            self._fobj = open(output, "a")
+        else:
+            self._fobj = StringIO()
+        self._outputs = []
+
+    def add_output(self, name, value):
+        self._outputs.append(f"{name}={json.dumps(value)}\n")
+
+    def write(self):
+        print("Creating outputs")
+        for l in self._outputs:
+            self._fobj.write(l)
+            sys.stdout.write(l)
 
 
 def load_mise():
@@ -14,21 +36,29 @@ def load_mise():
         return tomllib.load(fobj)
 
 
-def output_ci_tasks(mise_config):
-    ci_tasks = mise_config["tasks"]["ci"]["depends"]
-    output = os.getenv("GITHUB_OUTPUT")
-    line = f"ci-tasks={json.dumps(ci_tasks)}\n"
-    if output:
-        with open(output, "a") as fobj:
-            fobj.write(line)
-    else:
-        print(f"Would write {line!r} to output")
+def ci_tasks(mise_config):
+    return mise_config["tasks"]["ci"]["depends"]
+
+
+def run_publish(mise_config):
+    if "publish" not in mise_config["tasks"]:
+        print("No publish task")
+        return False
+    p = subprocess.run(["git", "rev-parse", "--symbolic-full-name", "HEAD"], capture_output=True, text=True)
+    rev = ("".join(p.stdout)).strip()
+    if "refs/heads/main" != rev:
+        print(f"Not on main branch, rev is {rev!r}")
+        return False
+    return True
 
 
 def main():
     print("Extracting CI info")
     mise_config = load_mise()
-    output_ci_tasks(mise_config)
+    output = Output()
+    output.add_output("ci-tasks", ci_tasks(mise_config))
+    output.add_output("run-publish", run_publish(mise_config))
+    output.write()
 
 
 if __name__ == "__main__":
