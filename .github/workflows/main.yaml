@@ -10,6 +10,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: jdx/mise-action@v2
       - run: mise run extract-ci-info
+        id: ci-info
+    outputs:
+      ci-tasks: ${{ steps.ci-info.outputs.ci-tasks }}
 
   ci:
     runs-on: ubuntu-latest
