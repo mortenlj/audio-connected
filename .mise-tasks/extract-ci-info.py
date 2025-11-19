@@ -23,9 +23,9 @@ class Output:
 
     def write(self):
         print("Creating outputs")
-        for l in self._outputs:
-            self._fobj.write(l)
-            sys.stdout.write(l)
+        for line in self._outputs:
+            self._fobj.write(line)
+            sys.stdout.write(line)
 
 
 def load_mise():
