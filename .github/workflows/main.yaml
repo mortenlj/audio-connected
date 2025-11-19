@@ -20,7 +20,7 @@ jobs:
       - setup
     strategy:
       matrix:
-        task: ${{ needs.setup.outputs.ci-tasks }}
+        task: ${{ fromJSON(needs.setup.outputs.ci-tasks) }}
     steps:
       - uses: actions/checkout@v4
       - uses: jdx/mise-action@v2
