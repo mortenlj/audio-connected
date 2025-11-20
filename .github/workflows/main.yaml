@@ -42,7 +42,7 @@ jobs:
     needs:
       - setup
       - build
-    if: ${{ needs.setup.outputs.run-publish }}
+    if: ${{ fromJSON(needs.setup.outputs.run-publish) }}
     steps:
       - uses: actions/checkout@v4
       - uses: jdx/mise-action@v2
