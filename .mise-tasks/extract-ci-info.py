@@ -52,12 +52,18 @@ def run_publish(mise_config):
     return True
 
 
+def artifacts(mise_config):
+    build_config = mise_config["tasks"]["build"]
+    return build_config.get("outputs", [])
+
+
 def main():
     print("Extracting CI info")
     mise_config = load_mise()
     output = Output()
     output.add_output("ci-tasks", ci_tasks(mise_config))
     output.add_output("run-publish", run_publish(mise_config))
+    output.add_output("artifacts", artifacts(mise_config))
     output.write()
 
 
