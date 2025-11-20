@@ -42,7 +42,7 @@ jobs:
         with:
           name: artifacts
           path: |
-            ${{ join(fromJSON(needs.setup.outputs.artifacts), '\n            ') }}
+            ${{ fromJSON(needs.setup.outputs.artifacts) }}
           if-no-files-found: error
 
   publish:

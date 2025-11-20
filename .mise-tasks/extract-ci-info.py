@@ -54,7 +54,7 @@ def run_publish(mise_config):
 
 def artifacts(mise_config):
     build_config = mise_config["tasks"]["build"]
-    return build_config.get("outputs", [])
+    return "\n".join(build_config.get("outputs", []))
 
 
 def main():
