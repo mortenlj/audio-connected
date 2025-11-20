@@ -1,6 +1,6 @@
 [tools]
 poetry = "latest"
-python = "3.11"
+python = "3.14.0"
 ruff = "latest"
 
 [tasks.fmt]
