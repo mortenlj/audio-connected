@@ -35,3 +35,6 @@ __pycache__
 # JVM
 .gradle
 build
+
+# Vendir checkouts
+.config/vendir/

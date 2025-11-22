@@ -2,6 +2,15 @@
 poetry = "latest"
 python = "3.14.0"
 ruff = "latest"
+vendir = "latest"
+
+[hooks]
+enter = "vendir sync"
+
+[task_config]
+includes = [
+    ".config/vendir/mise-lib",
+]
 
 [tasks.fmt]
 description = "Format source"
