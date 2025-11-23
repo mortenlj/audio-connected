@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: Test commit to see how vendir sync behaves
-      sha: e6a47344f9b48322c1ab16d0de09cf448caff1ce
+      commitTitle: Add python:build task
+      sha: f2cd6a85b28d167630867bcb0fb5eb2dcabe508c
     path: mise-lib
   path: .config/vendir
 kind: LockConfig

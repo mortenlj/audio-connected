@@ -1,7 +1,6 @@
 [tools]
 poetry = "latest"
 python = "3.14.0"
-ruff = "latest"
 vendir = "latest"
 
 [hooks]
@@ -14,19 +13,19 @@ includes = [
 
 [tasks.fmt]
 description = "Format source"
-run = "ruff format"
+depends = ["python:fmt"]
 
 [tasks.fmt-check]
 description = "Check formatting"
-run = "ruff format --diff"
+depends = ["python:fmt-check"]
 
 [tasks.lint]
 description = "Lint the project"
-run = "ruff check"
+depends = ["python:lint"]
 
 [tasks.lint-fix]
 description = "Run lint fixers"
-run = "ruff check --fix"
+depends = ["python:lint-fix"]
 
 [tasks.ci]
 description = "Run CI tasks"
@@ -34,6 +33,6 @@ depends = ["fmt-check", "lint"]
 
 [tasks.build]
 description = "Build the project"
-run = "poetry build"
+depends = ["python:build"]
 sources = ["audio_connected/**/*.py", "poetry.lock", "pyproject.toml"]
 outputs = ["dist/audio_connected-*.tar.gz", "dist/audio_connected-*.whl"]
