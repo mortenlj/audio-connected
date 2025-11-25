@@ -17,7 +17,7 @@ jobs:
       run-publish: ${{ steps.ci-info.outputs.run-publish }}
       artifacts: ${{ steps.ci-info.outputs.artifacts }}
       version: ${{ steps.ci-info.outputs.version }}
-      clean_version: ${{ steps.ci-info.outputs.clean_version }}
+      clean-version: ${{ steps.ci-info.outputs.clean-version }}
 
   ci:
     runs-on: ubuntu-latest
@@ -38,7 +38,7 @@ jobs:
       - setup
       - ci
     env:
-      UV_DYNAMIC_VERSIONING_BYPASS: ${{ fromJSON(needs.setup.outputs.clean_version) }}
+      UV_DYNAMIC_VERSIONING_BYPASS: ${{ fromJSON(needs.setup.outputs.clean-version) }}
     steps:
       - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
       - uses: jdx/mise-action@d16887ba50704baed7de72bd1e82e04391e4457a # v3
@@ -74,7 +74,7 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@5be0e66d93ac7ed76da52eca8bb058f665c3a5fe # v2.4.2
         with:
-          tag_name: ${{ fromJSON(needs.setup.outputs.clean_version) }}
+          tag_name: ${{ fromJSON(needs.setup.outputs.clean-version) }}
           name: Release ${{ fromJSON(needs.setup.outputs.version) }}
           draft: false
           prerelease: false
