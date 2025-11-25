@@ -33,6 +33,7 @@ depends = ["fmt-check", "lint"]
 
 [tasks.build]
 description = "Build the project"
+alias = "release-build"
 depends = ["python:build"]
 sources = ["audio_connected/**/*.py", "uv.lock", "pyproject.toml"]
 outputs = ["dist/audio_connected-*.tar.gz", "dist/audio_connected-*.whl"]
