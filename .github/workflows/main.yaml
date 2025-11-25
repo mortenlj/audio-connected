@@ -62,12 +62,11 @@ jobs:
       - build
     if: ${{ fromJSON(needs.setup.outputs.run-publish) }}
     steps:
-      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
-
       - name: Download a Build Artifact
         uses: actions/download-artifact@v6.0.0
         with:
           merge-multiple: true
+          path: ./artifacts/
 
       # TODO: Remove step when testing completed
       - name: Display structure of downloaded files
