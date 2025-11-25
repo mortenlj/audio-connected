@@ -63,14 +63,17 @@ jobs:
     if: ${{ fromJSON(needs.setup.outputs.run-publish) }}
     steps:
       - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
-      - name: Download artifact
-        uses: dawidd6/action-download-artifact@ac66b43f0e6a346234dd65d4d0c8fbb31cb316e5 # v11
-        with:
-          name: artifacts.*
-          name_is_regexp: true
-          path: ./artifacts/
 
-      - name: create release
+      - name: Download a Build Artifact
+        uses: actions/download-artifact@v6.0.0
+        with:
+          merge-multiple: true
+
+      # TODO: Remove step when testing completed
+      - name: Display structure of downloaded files
+        run: ls -R
+
+      - name: Create release
         id: create_release
         uses: softprops/action-gh-release@5be0e66d93ac7ed76da52eca8bb058f665c3a5fe # v2.4.2
         with:
