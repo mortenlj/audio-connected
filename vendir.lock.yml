@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: Extract version
-      sha: f3df553c1681d8380c905e8fa2e21a82995c48ef
+      commitTitle: No longer require publish task to do publishing...
+      sha: b717f3b0d393101fc6b4a452b79b3304dc6492dd
     path: mise-lib
   path: .config/vendir
 kind: LockConfig
