@@ -2,8 +2,9 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: Don't want to do it this way, removing script
-      sha: aeb4f96a2de993af525d59dc1fddb67fac764334
+      commitTitle: Only run publish if there has been changes to build sources since
+        last release...
+      sha: bd69e7a8571ad9643f77c8f743b0ef0ab5563da3
     path: mise-lib
   path: .config/vendir
 kind: LockConfig
