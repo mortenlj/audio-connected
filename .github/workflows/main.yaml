@@ -54,9 +54,11 @@ jobs:
 
   publish:
     runs-on: ubuntu-latest
+    environment: testpypi # TODO: Change to pypi when testing completed
     permissions:
       contents: write
       issues: write
+      id-token: write
     needs:
       - setup
       - build
@@ -66,7 +68,7 @@ jobs:
         uses: actions/download-artifact@v6.0.0
         with:
           merge-multiple: true
-          path: ./artifacts/
+          path: artifacts/
 
       # TODO: Remove step when testing completed
       - name: Display structure of downloaded files
@@ -80,4 +82,10 @@ jobs:
           name: Release ${{ fromJSON(needs.setup.outputs.version) }}
           draft: true  # TODO: Change to false when testing completed
           prerelease: false
-          files: ./artifacts/*
+          files: artifacts/*
+
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/ # TODO: Remove when testing completed
+          packages-dir: artifacts/
