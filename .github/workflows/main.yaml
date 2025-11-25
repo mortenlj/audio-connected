@@ -17,6 +17,7 @@ jobs:
       run-publish: ${{ steps.ci-info.outputs.run-publish }}
       artifacts: ${{ steps.ci-info.outputs.artifacts }}
       version: ${{ steps.ci-info.outputs.version }}
+      clean_version: ${{ steps.ci-info.outputs.clean_version }}
 
   ci:
     runs-on: ubuntu-latest
@@ -71,8 +72,8 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@5be0e66d93ac7ed76da52eca8bb058f665c3a5fe # v2.4.2
         with:
-          tag_name: ${{ needs.setup.outputs.version }}
-          name: Release ${{ needs.setup.outputs.version }}
+          tag_name: ${{ fromJSON(needs.setup.outputs.clean_version) }}
+          name: Release ${{ fromJSON(needs.setup.outputs.version) }}
           draft: true  # TODO: Change to false when testing completed
           prerelease: false
           files: ./artifacts/*/*
