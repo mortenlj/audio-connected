@@ -89,3 +89,5 @@ jobs:
         with:
           repository-url: https://test.pypi.org/legacy/ # TODO: Remove when testing completed
           packages-dir: artifacts/
+          verbose: true
+          print-hash: true
