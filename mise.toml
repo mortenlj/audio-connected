@@ -1,6 +1,6 @@
 [tools]
-poetry = "latest"
 python = "3.14.0"
+uv = "latest"
 vendir = "latest"
 
 [hooks]
