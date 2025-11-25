@@ -80,4 +80,4 @@ jobs:
           name: Release ${{ fromJSON(needs.setup.outputs.version) }}
           draft: true  # TODO: Change to false when testing completed
           prerelease: false
-          files: ./artifacts/*/*
+          files: ./artifacts/*
