@@ -38,4 +38,4 @@ sources = ["audio_connected/**/*.py", "poetry.lock", "pyproject.toml"]
 outputs = ["dist/audio_connected-*.tar.gz", "dist/audio_connected-*.whl"]
 
 [vars]
-major_version = "1"
+major_version = "0"
