@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: Add python:build task
-      sha: f2cd6a85b28d167630867bcb0fb5eb2dcabe508c
+      commitTitle: Extract version
+      sha: f3df553c1681d8380c905e8fa2e21a82995c48ef
     path: mise-lib
   path: .config/vendir
 kind: LockConfig

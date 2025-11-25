@@ -13,9 +13,10 @@ jobs:
       - run: mise run extract-ci-info
         id: ci-info
     outputs:
-      ci-tasks: ${{ steps.ci-info.outputs.ci-tasks }}
-      run-publish: ${{ steps.ci-info.outputs.run-publish }}
-      artifacts: ${{ steps.ci-info.outputs.artifacts }}
+      ci-tasks: ${{ fromJSON(steps.ci-info.outputs.ci-tasks) }}
+      run-publish: ${{ fromJSON(steps.ci-info.outputs.run-publish) }}
+      artifacts: ${{ fromJSON(steps.ci-info.outputs.artifacts) }}
+      version: ${{ fromJSON(steps.ci-info.outputs.version) }}
 
   ci:
     runs-on: ubuntu-latest
@@ -23,7 +24,7 @@ jobs:
       - setup
     strategy:
       matrix:
-        task: ${{ fromJSON(needs.setup.outputs.ci-tasks) }}
+        task: ${{ needs.setup.outputs.ci-tasks }}
     steps:
       - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
       - uses: jdx/mise-action@d16887ba50704baed7de72bd1e82e04391e4457a # v3
@@ -43,7 +44,7 @@ jobs:
         with:
           name: artifacts
           path: |
-            ${{ fromJSON(needs.setup.outputs.artifacts) }}
+            ${{ needs.setup.outputs.artifacts }}
           if-no-files-found: error
 
   publish:
@@ -51,8 +52,22 @@ jobs:
     needs:
       - setup
       - build
-    if: ${{ fromJSON(needs.setup.outputs.run-publish) }}
+    if: ${{ needs.setup.outputs.run-publish }}
     steps:
       - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
-      - uses: jdx/mise-action@d16887ba50704baed7de72bd1e82e04391e4457a # v3
-      - run: mise run publish
+      - name: Download artifact
+        uses: dawidd6/action-download-artifact@ac66b43f0e6a346234dd65d4d0c8fbb31cb316e5 # v11
+        with:
+          name: artifacts.*
+          name_is_regexp: true
+          path: ./artifacts/
+
+      - name: create release
+        id: create_release
+        uses: softprops/action-gh-release@5be0e66d93ac7ed76da52eca8bb058f665c3a5fe # v2.4.2
+        with:
+          tag_name: ${{ needs.setup.outputs.version }}
+          name: Release ${{ needs.setup.outputs.version }}
+          draft: true  # TODO: Change to false when testing completed
+          prerelease: false
+          files: ./artifacts/*/*
