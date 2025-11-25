@@ -13,10 +13,10 @@ jobs:
       - run: mise run extract-ci-info
         id: ci-info
     outputs:
-      ci-tasks: ${{ fromJSON(steps.ci-info.outputs.ci-tasks) }}
-      run-publish: ${{ fromJSON(steps.ci-info.outputs.run-publish) }}
-      artifacts: ${{ fromJSON(steps.ci-info.outputs.artifacts) }}
-      version: ${{ fromJSON(steps.ci-info.outputs.version) }}
+      ci-tasks: ${{ steps.ci-info.outputs.ci-tasks }}
+      run-publish: ${{ steps.ci-info.outputs.run-publish }}
+      artifacts: ${{ steps.ci-info.outputs.artifacts }}
+      version: ${{ steps.ci-info.outputs.version }}
 
   ci:
     runs-on: ubuntu-latest
@@ -24,7 +24,7 @@ jobs:
       - setup
     strategy:
       matrix:
-        task: ${{ needs.setup.outputs.ci-tasks }}
+        task: ${{ fromJSON(needs.setup.outputs.ci-tasks) }}
     steps:
       - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
       - uses: jdx/mise-action@d16887ba50704baed7de72bd1e82e04391e4457a # v3
@@ -44,7 +44,7 @@ jobs:
         with:
           name: artifacts
           path: |
-            ${{ needs.setup.outputs.artifacts }}
+            ${{ fromJSON(needs.setup.outputs.artifacts) }}
           if-no-files-found: error
 
   publish:
@@ -52,7 +52,7 @@ jobs:
     needs:
       - setup
       - build
-    if: ${{ needs.setup.outputs.run-publish }}
+    if: ${{ fromJSON(needs.setup.outputs.run-publish) }}
     steps:
       - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
       - name: Download artifact
