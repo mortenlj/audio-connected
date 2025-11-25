@@ -8,9 +8,11 @@ dependencies = [
     "pulsectl<25.0.0,>=24.0.0",
 ]
 name = "audio-connected"
-version = "0.2.0"
 description = "Watches PulseAudio events for new sinks connected, and if the name matches the configured name, make that sink the default sink."
 readme = "README.rst"
+dynamic = [
+    "version",
+]
 
 [project.urls]
 Issues = "https://github.com/mortenlj/audio-connected/issues"
@@ -27,5 +29,11 @@ dev = [
 [tool.ruff]
 line-length = 120
 
-[tool.uv]
-package = true
+[build-system]
+requires = ["hatchling", "uv-dynamic-versioning"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "uv-dynamic-versioning"
+
+[tool.uv-dynamic-versioning]

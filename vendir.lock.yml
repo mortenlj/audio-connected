@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: Have a clean version without local part
-      sha: 5fc8bd58c715c5bcf2253bde40b3913bfb9ba2de
+      commitTitle: Don't want to do it this way, removing script
+      sha: aeb4f96a2de993af525d59dc1fddb67fac764334
     path: mise-lib
   path: .config/vendir
 kind: LockConfig
