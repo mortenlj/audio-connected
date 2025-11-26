@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: Make sure git uses project root and check for errors
-      sha: 416d0259d9e55b2f4ca47b4c10e2f46ce77c4ff9
+      commitTitle: Strip whitespace from git SHA outputs in extract-ci-info
+      sha: e151c71e4a6dedabc596573c25ce631d4711ee11
     path: mise-lib
   path: .config/vendir
 kind: LockConfig
