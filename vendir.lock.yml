@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: Strip whitespace from git SHA outputs in extract-ci-info
-      sha: e151c71e4a6dedabc596573c25ce631d4711ee11
+      commitTitle: Split output into list of paths
+      sha: 0ee5c4f66f4603d61697578ff86d06f1700fdcd2
     path: mise-lib
   path: .config/vendir
 kind: LockConfig
