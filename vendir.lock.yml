@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: Add warning if not enough git history
-      sha: 4aa8b9ac95e1a3b05ffd1bfa01becf496861f760
+      commitTitle: Make sure git uses project root and check for errors
+      sha: 416d0259d9e55b2f4ca47b4c10e2f46ce77c4ff9
     path: mise-lib
   path: .config/vendir
 kind: LockConfig
