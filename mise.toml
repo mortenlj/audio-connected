@@ -9,6 +9,7 @@ enter = "vendir sync"
 [task_config]
 includes = [
     ".config/vendir/mise-lib",
+    ".config/vendir/mise-lib/virtual_tasks.toml",
 ]
 
 [tasks.fmt]
