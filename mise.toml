@@ -31,12 +31,9 @@ depends = ["python:lint-fix"]
 description = "Run CI tasks"
 depends = ["fmt-check", "lint"]
 
-[tasks.build]
+[tasks.release-build]
 description = "Build the project"
-alias = "release-build"
+alias = "build"
 depends = ["python:build"]
 sources = ["audio_connected/**/*.py", "uv.lock", "pyproject.toml"]
 outputs = ["dist/audio_connected-*.tar.gz", "dist/audio_connected-*.whl"]
-
-[vars]
-major_version = "0"

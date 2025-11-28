@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: Split output into list of paths
-      sha: 0ee5c4f66f4603d61697578ff86d06f1700fdcd2
+      commitTitle: Better error handling and debuggability for build-target script
+      sha: 1969b3bb27324cd8a5399b4aecb418632092abcd
     path: mise-lib
   path: .config/vendir
 kind: LockConfig

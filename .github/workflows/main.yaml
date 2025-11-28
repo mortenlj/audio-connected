@@ -3,6 +3,10 @@ name: audio-connected
 on:
   push:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   setup:
     runs-on: ubuntu-latest
@@ -20,6 +24,7 @@ jobs:
       artifacts: ${{ steps.ci-info.outputs.artifacts }}
       version: ${{ steps.ci-info.outputs.version }}
       clean-version: ${{ steps.ci-info.outputs.clean-version }}
+      release-build-tasks: ${{ steps.ci-info.outputs.release-build-tasks }}
 
   ci:
     runs-on: ubuntu-latest
@@ -32,24 +37,27 @@ jobs:
       - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
       - uses: jdx/mise-action@d16887ba50704baed7de72bd1e82e04391e4457a # v3
       - run: vendir sync --locked
-      - run: mise run ${{ matrix.task }}
+      - run: mise run ${{ matrix.task.cmd }}
 
   build:
     runs-on: ubuntu-latest
     needs:
       - setup
       - ci
-    env:
-      UV_DYNAMIC_VERSIONING_BYPASS: ${{ fromJSON(needs.setup.outputs.clean-version) }}
+    strategy:
+      matrix:
+        task: ${{ fromJSON(needs.setup.outputs.release-build-tasks) }}
     steps:
       - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
       - uses: jdx/mise-action@d16887ba50704baed7de72bd1e82e04391e4457a # v3
       - run: vendir sync --locked
-      - run: mise run build
+      - run: mise run ${{ matrix.task.cmd }}
+        env:
+          UV_DYNAMIC_VERSIONING_BYPASS: ${{ fromJSON(needs.setup.outputs.clean-version) }}
       - name: Save artifacts for release
         uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5
         with:
-          name: artifacts
+          name: artifacts-${{ matrix.task.name }}
           path: |
             ${{ fromJSON(needs.setup.outputs.artifacts) }}
           if-no-files-found: error
