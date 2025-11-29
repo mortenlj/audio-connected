@@ -1,16 +1,6 @@
 [tools]
 python = "3.14.0"
 uv = "latest"
-vendir = "latest"
-
-[hooks]
-enter = "vendir sync"
-
-[task_config]
-includes = [
-    ".config/vendir/mise-lib",
-    ".config/vendir/mise-lib/virtual_tasks.toml",
-]
 
 [tasks.fmt]
 description = "Format source"
@@ -38,3 +28,6 @@ alias = "build"
 depends = ["python:build"]
 sources = ["audio_connected/**/*.py", "uv.lock", "pyproject.toml"]
 outputs = ["dist/audio_connected-*.tar.gz", "dist/audio_connected-*.whl"]
+
+[task_config]
+includes = [".config/mise-lib/virtual_tasks.toml", ".config/mise-lib"]
