@@ -23,7 +23,7 @@ audio-connected = "audio_connected:main"
 
 [dependency-groups]
 dev = [
-    "pytest==9.0.2",
+    "pytest==9.0.3",
 ]
 
 [tool.ruff]
