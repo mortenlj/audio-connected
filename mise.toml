@@ -2,7 +2,7 @@
 includes = [".config/mise-lib/virtual_tasks.toml", ".config/mise-lib/tasks"]
 
 [tools]
-python = "3.14.5"
+python = "3.14.6"
 uv = "latest"
 
 [tasks.fmt]
